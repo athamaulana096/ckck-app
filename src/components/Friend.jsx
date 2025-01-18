@@ -1,6 +1,8 @@
-function Friend({ friend }) {
+function Friend({ friend, onSelectedFriend, selectedFriend }) {
+  const isSelected = selectedFriend?.id === friend.id;
+
   return (
-    <li>
+    <li className={isSelected ? 'selected' : ''}>
       <img src={friend.image} alt={friend.name} />
       <h3>{friend.name}</h3>
       {friend.balance < 0 && (
@@ -14,7 +16,9 @@ function Friend({ friend }) {
         </p>
       )}
       {friend.balance === 0 && <p>Lunas</p>}
-      <button className="button">Pilih</button>
+      <button className="button" onClick={() => onSelectedFriend(friend)}>
+        {isSelected ? 'Tutup' : 'Pilih'}
+      </button>
     </li>
   );
 }
